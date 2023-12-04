@@ -30,6 +30,6 @@ Note : Make sure you have nodemon s installed in your system otherwise you can i
 |2|`/v1/ticket/{id}`|GET|TODO|Yes|get a ticket details
 |3|`/v1/ticket`|POST|TODO|Yes|Create new ticket
 |4|`/v1/ticket/{id}`|PUT|TODO|Yes|update ticket details ie. reply message
-|5|`/v1/ticket/close-ticket/{id}`|PUT|TODO|Yes|Get users info
+|5|`/v1/ticket/close-ticket/{id}`|PUT|TODO|Yes|update ticket details ie. reply message
 
 
