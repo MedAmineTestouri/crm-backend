@@ -1,0 +1,12 @@
+### user sign up endpoint
+POST http://localhost:3001/v1/user
+Content-Type: application/json
+
+    {
+        "name":"Myfirstone",
+        "company":"Myfirstone",
+        "address":"Myfirstone",
+        "phone":"23455432",
+        "email":"Mystonee@e.com",
+        "password":"Secret123"
+    }
