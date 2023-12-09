@@ -4,6 +4,7 @@ const router = express.Router()
 const {insertUser,getUserByEmail} = require('../model/user/User.model')
 
 const {hashPassword,comparePasswd} = require('../helpers/bcrypt.helper')
+const {createRefreshJWT,createAccessJWT}=require('../helpers/jwt.helper')
 
 
 router.all('/',(req,res,next)=>{
@@ -35,6 +36,9 @@ router.post("/",async(req,res)=>{
 // User Sign in Router
 router.post('/login',async(req,res)=>{
     const {email,password} = req.body
+    if (!email || !password){
+        res.json({status:'error',message:"invalid form submission"})
+    }
 
     //get user with password from database
     const user = await getUserByEmail(email)
@@ -42,13 +46,21 @@ router.post('/login',async(req,res)=>{
     const passfromDB = user && user._id ? user.password : null
     if(!passfromDB) return res.json({status:'error',message:"invalid email or password"})
 
-    const result = await comparePasswd(password,passfromDB)
-    console.log(result)
+    
 
-    if (!email || !password){
+
+    const result = await comparePasswd(password,passfromDB)
+    
+    
+
+   
+
+    if(!result) {
         res.json({status:'error',message:"invalid form submission"})
     }
-    res.json({status:"success",message : "login successfuy"})
+    const accessJWT = await createAccessJWT(user.email,`${user._id}`)
+    const refreshJWT = await createRefreshJWT(user.email)
+    res.json({status:"success",message : "login successfuy",access:accessJWT,refresh:refreshJWT})
 })
 
-module.exports = router;
+module.exports = router;    
