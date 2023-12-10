@@ -11,7 +11,6 @@ Content-Type: application/json
         "password":"Secret123"
     }
 ### user sign in endpoint
-
 POST http://localhost:3001/v1/user/login
 Content-Type: application/json
 
