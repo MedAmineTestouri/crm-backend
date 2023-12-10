@@ -59,7 +59,7 @@ router.post('/login',async(req,res)=>{
         res.json({status:'error',message:"invalid form submission"})
     }
     const accessJWT = await createAccessJWT(user.email,`${user._id}`)
-    const refreshJWT = await createRefreshJWT(user.email)
+    const refreshJWT = await createRefreshJWT(user.email,`${user._id}`)
     res.json({status:"success",message : "login successfuy",access:accessJWT,refresh:refreshJWT})
 })
 

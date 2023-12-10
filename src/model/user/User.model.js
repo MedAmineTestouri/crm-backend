@@ -10,7 +10,7 @@ const insertUser = (userObj) => {
     )
     
 }
-const getUserByEmail = email => {
+const getUserByEmail = (email) => {
     return new Promise((resolve,reject)=>{
         if(!email){
             return false
@@ -33,4 +33,24 @@ const getUserByEmail = email => {
     
     
 }
-module.exports = {insertUser,getUserByEmail}
+const storeUserRefreshToken = (_id,token)=>{
+
+    return new Promise((resolve,reject)=>{
+        try {
+                UserSchema.findOneAndUpdate(
+                    {_id},
+                    {$set : {"refreshJWT.token":token,
+                              "refreshJWT.addedAt":Date.now()   }},
+                    {new:true})
+                    .then((data)=> resolve(data))
+                    .catch((error) => {reject(error)
+                                        console.log(error)})
+        } 
+        catch (error) {
+            
+        }
+
+    })
+
+}
+module.exports = {insertUser,getUserByEmail,storeUserRefreshToken}
