@@ -53,4 +53,28 @@ const storeUserRefreshToken = (_id,token)=>{
     })
 
 }
-module.exports = {insertUser,getUserByEmail,storeUserRefreshToken}
+const getuserByid = (_id) => {
+    return new Promise((resolve,reject)=>{
+        if(!_id){
+            return false
+        }
+        try {
+            UserSchema.findOne({_id}).then((data,error)=>{
+                if(error){
+                    console.log(error)
+                    reject(error)
+                }
+                resolve(data)
+                
+            })
+        } 
+        catch (error) {
+            reject(error)
+        }
+        
+    })
+    
+    
+}
+
+module.exports = {insertUser,getUserByEmail,storeUserRefreshToken,getuserByid}

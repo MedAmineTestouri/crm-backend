@@ -18,3 +18,8 @@ Content-Type: application/json
         "email":"Mystonee@e.com",
         "password":"Secret123"
     }
+
+### user sign in endpoint
+
+GET http://localhost:3001/v1/user
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik15c3RvbmVlQGUuY29tIiwiaWF0IjoxNzAyNzU5MDA1LCJleHAiOjE3MDI3NTk5MDV9.bBll05FCd4gUrORQxjtbD6zQ0IjbQx_pm3yrGDnz0MA

@@ -5,8 +5,12 @@ const {storeUserRefreshToken} =require("../model/user/User.model")
 const createAccessJWT = async(email,_id)=>{
 
     try {
-        var accessJWT = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET,{expiresIn : '15m'});
+        const accessJWT =  jwt.sign({ email }, process.env.JWT_ACCESS_SECRET,{expiresIn : '15m'});
+        
         await setJWT(accessJWT,_id)
+         const id = await getJWT(accessJWT)
+         console.log('idddd',id)
+         
         return  Promise.resolve(accessJWT)
     } 
     catch (error) {
@@ -30,4 +34,16 @@ const createRefreshJWT = async(payload,_id)=>{
     
 }
 
-module.exports = {createAccessJWT,createRefreshJWT}
+const verifyAccessJWT = (userJWT) =>{
+
+    try {
+        return Promise.resolve(jwt.verify(userJWT,process.env.JWT_ACCESS_SECRET))
+        
+        
+    } catch (error) {
+        
+        return Promise.reject(error)
+    }
+}
+
+module.exports = {createAccessJWT,createRefreshJWT,verifyAccessJWT}

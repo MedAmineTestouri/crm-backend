@@ -1,15 +1,27 @@
 
 const express = require('express')
 const router = express.Router()
-const {insertUser,getUserByEmail} = require('../model/user/User.model')
+const {insertUser,getUserByEmail,getuserByid} = require('../model/user/User.model')
 
 const {hashPassword,comparePasswd} = require('../helpers/bcrypt.helper')
 const {createRefreshJWT,createAccessJWT}=require('../helpers/jwt.helper')
+const {userAuthaurization} = require('../middlewares/authorization.middleware')
 
 
 router.all('/',(req,res,next)=>{
     // res.json({message : "return from user router"})
     next() //this function basically what it does is that its continues to the next route 
+})
+
+router.get('/',userAuthaurization,async(req,res)=>{
+    const _id = req.userId
+    const userProf = await getuserByid(_id)
+
+    //extract userid
+    //get user profie based on the user id
+    if(userProf){res.json({userProf})};
+    res.status(403).json({message:"forbidden wrong token pls try again"})
+    
 })
 // create new user route
 router.post("/",async(req,res)=>{
@@ -62,5 +74,7 @@ router.post('/login',async(req,res)=>{
     const refreshJWT = await createRefreshJWT(user.email,`${user._id}`)
     res.json({status:"success",message : "login successfuy",access:accessJWT,refresh:refreshJWT})
 })
+
+
 
 module.exports = router;    
