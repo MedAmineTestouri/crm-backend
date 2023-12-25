@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const {insertUser,getUserByEmail,getuserByid} = require('../model/user/User.model')
+const {insertPin} = require('../model/resetPin/ResetPin.model')
 
 const {hashPassword,comparePasswd} = require('../helpers/bcrypt.helper')
 const {createRefreshJWT,createAccessJWT}=require('../helpers/jwt.helper')
@@ -73,6 +74,32 @@ router.post('/login',async(req,res)=>{
     const accessJWT = await createAccessJWT(user.email,`${user._id}`)
     const refreshJWT = await createRefreshJWT(user.email,`${user._id}`)
     res.json({status:"success",message : "login successfuy",access:accessJWT,refresh:refreshJWT})
+})
+
+//A. create and send password reset pin number
+//1. recieve email
+//2.check if user exist for the email 
+//3.create unique 6digit pin
+//4.sav pin and email in db
+//5.email the pin
+
+//B. update password in DB
+//1.receive email , pin and  new password
+//2.validate pin
+//3.encrypt new password 
+//4.update password in db
+//5.send email notification
+
+//C.Server side form validation
+//1.create middleware to validate form data
+router.post('/reset-password',async(req,res)=>{
+    const {email} = req.body
+    const user = await getUserByEmail(email)
+    if(user && user._id){
+       const newPin = await insertPin(email)
+       return res.json(newPin)
+    }
+    res.json({msg:"wrng informations please try again"});
 })
 
 

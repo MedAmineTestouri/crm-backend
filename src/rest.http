@@ -33,5 +33,12 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik15c3RvbmVlQGUuY
 GET http://localhost:3001/v1/token
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik15c3RvbmVlQGUuY29tIiwiaWF0IjoxNzAzMTU3NjE5LCJleHAiOjE3MDU3NDk2MTl9.5H4hZ7pYncIiWE7V6Jf15OKw3PtfoCt_Vd5Gn10ZyCE
 
+### reset password user
 
+POST http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+
+    {
+        "email":"Mystonee@e.com"
+    }
 

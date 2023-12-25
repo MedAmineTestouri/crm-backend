@@ -16,10 +16,10 @@ Note : Make sure you have nodemon s installed in your system otherwise you can i
 **All the user API router follows `/v1/user` :**
 |#| Routers|method|Progress|is Private|description
 |----------------|----------------|------------|--------------|-------------|-----------------|
-|1| `/v1/user/login`|POST|TODO|No|verify user Authentication and return JWT
-|2|`/v1/user/request-reset-password`|POST|TODO|No|verify email and email pin to reset password
-|3|`/v1/user/reset-password`|PUT|TODO|No|Replace with new password
-|4|`/v1/user/`|GET|TODO|Yes|Get users info
+|1| `/v1/user/login`|POST|Done|No|verify user Authentication and return JWT
+|2|`/v1/user/reset-password`|POST|TODO|No|verify email and email pin to reset password
+|3|`/v1/user/reset-password`|PATCH|TODO|No|Replace with new password
+|4|`/v1/user/`|GET|Done|Yes|Get users info
 
 ### Ticket API Resources
 **all the Ticket API Router follows `/v1/ticket` :**
