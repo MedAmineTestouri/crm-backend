@@ -20,7 +20,7 @@ router.get('/',userAuthaurization,async(req,res)=>{
     //extract userid
     //get user profie based on the user id
     if(userProf){res.json({userProf})};
-    res.status(403).json({message:"forbidden wrong token pls try again"})
+//    return res.status(403).json({message:"forbidden wrong token pls try again"})
     
 })
 // create new user route
